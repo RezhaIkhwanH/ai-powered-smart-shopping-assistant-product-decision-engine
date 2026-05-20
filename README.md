@@ -1,0 +1,2 @@
+# ai-powered-smart-shopping-assistant-product-decision-engine
+This project aims to develop an AI-powered shopping assistant that enhances the online shopping experience by providing users with intelligent product comparisons, personalized recommendations, and multimodal product understanding. The system leverages advanced AI techniques, including context engineering, prompt engineering, and multimodal AI, to 
