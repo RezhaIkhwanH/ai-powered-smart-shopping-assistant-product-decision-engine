@@ -1,0 +1,86 @@
+# =========================
+# OS / System Files
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# =========================
+# Dependencies
+# =========================
+node_modules/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# =========================
+# Package Managers
+# =========================
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# =========================
+# Logs
+# =========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# =========================
+# Environment Files
+# =========================
+.env
+.env*
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.py[oc]
+*$py.class
+venv/
+env/
+.venv/
+wheels/
+*.egg-info
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Build / Output
+# =========================
+build/
+dist/
+coverage/
+.next/
+out/
+
+# =========================
+# TypeScript
+# =========================
+*.tsbuildinfo
+next-env.d.ts
+
+# =========================
+# Misc
+# =========================
+*.pem
+.vercel
+
+# MLflow
+mlflow.db
+mlruns/
+mlartifacts/
