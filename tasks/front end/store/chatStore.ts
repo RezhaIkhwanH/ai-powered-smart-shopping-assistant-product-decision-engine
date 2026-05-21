@@ -29,6 +29,8 @@ type ChatStore = {
   setRooms: (rooms: Room[]) => void;
   // 2. TAMBAH INI: Untuk load history chat dari API
   setMessages: (roomId: string, messages: Message[]) => void;
+  // 3. TAMBAH INI: Untuk hapus room
+  deleteRoom: (roomId: string) => void;
 };
 
 export const useChatStore = create<ChatStore>((set) => ({
@@ -41,6 +43,12 @@ export const useChatStore = create<ChatStore>((set) => ({
     set((state) => ({
       rooms: [{ id, title, messages: [] }, ...state.rooms],
       activeRoomId: id,
+    })),
+
+  deleteRoom: (roomId) =>
+    set((state) => ({
+      // Filter/buang room yang ID-nya sama dengan yang dihapus
+      rooms: state.rooms.filter((room) => room.id !== roomId),
     })),
 
   addMessage: (roomId, text, sender, imageUrls = null) =>

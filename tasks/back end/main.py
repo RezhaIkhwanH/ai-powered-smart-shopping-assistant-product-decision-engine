@@ -213,6 +213,32 @@ async def create_room(current_user: dict = Depends(get_current_user)):
     }   
 
 
+@app.delete("/room/{room_id}",description="Delete a chat room and its history for the authenticated user")
+async def delete_room(room_id: str, current_user: dict = Depends(get_current_user)):
+    user_id = current_user["id"]
+    
+    # 1. Cek apakah room ada dan milik user
+    response = supabase.table("room_chats").select("*").eq("id", room_id).eq("user_id", user_id).execute()
+    if not response.data:
+        return {
+            "status": "error",
+            "data": "Room tidak ditemukan atau bukan milik Anda",
+            "codestatus": 404
+        }
+    
+    # 2. Hapus chat history terkait room
+    supabase.table("chat_histories").delete().eq("room_id", room_id).execute()
+    
+    # 3. Hapus room
+    supabase.table("room_chats").delete().eq("id", room_id).execute()
+    
+    return {
+        "status": "success",
+        "data": "Room dan chat history berhasil dihapus",
+        "codestatus": 200
+    }
+
+
 @app.post("/chat",description="inferece to agent AI")
 async def save_chat(
     room_id: str = Form(...),
@@ -317,7 +343,6 @@ async def get_profile(current_user: dict = Depends(get_current_user)):
             "codestatus": 200
         }
 
-
 @app.post("/payment_webhook")
 async def payment_webhook(data: payment_webhook_data):
     
@@ -352,7 +377,7 @@ async def payment_webhook(data: payment_webhook_data):
             "data": str(e),
             "codestatus": 500
         }
-
+ 
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="localhost", port=8000, log_level="debug",workers=1)
